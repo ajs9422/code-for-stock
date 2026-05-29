@@ -1,0 +1,77 @@
+{
+	"folders": [
+		{
+			"name": "code",
+			"path": ".."
+		},
+		{
+			"name": "0_Naver_New_검색",
+			"path": "../0_Naver_New_검색"
+		},
+		{
+			"name": "1_earnings_screener",
+			"path": "../1_earnings_screener"
+		},
+		{
+			"name": "2_괴리율_목표가상향",
+			"path": "../2_괴리율_목표가상향"
+		},
+		{
+			"name": "3_multi_factor_scanner",
+			"path": "../3_multi_factor_scanner"
+		},
+		{
+			"name": "4_실적개선",
+			"path": "../4_실적개선"
+		},
+		{
+			"name": "4_financial_scanner",
+			"path": "../4_financial_scanner"
+		},
+		{
+			"name": "5_주도주찾기",
+			"path": "../5_주도주찾기"
+		},
+		{
+			"name": "6_유튜브_AI종목스캐너",
+			"path": "."
+		},
+		{
+			"name": "6_유튜브_AI종목스캐너_LocalLLM",
+			"path": "../6_유튜브_AI종목스캐너_LocalLLM"
+		},
+		{
+			"name": "7_눌림목_스캐너",
+			"path": "../7_눌림목_스캐너"
+		},
+		{
+			"name": "8_뉴스기사_인사이트",
+			"path": "../8_뉴스기사_인사이트"
+		},
+		{
+			"name": "8_뉴스기사_인사이트_LocalLLM",
+			"path": "../8_뉴스기사_인사이트_LocalLLM"
+		},
+		{
+			"name": "9_ETF분석",
+			"path": "../9_ETF분석"
+		},
+		{
+			"name": "10_투자일정",
+			"path": "../10_투자일정"
+		},
+		{
+			"name": "20_공지메일",
+			"path": "../20_공지메일"
+		},
+		{
+			"name": "14_마켓인사이트",
+			"path": "../14_마켓인사이트"
+		},
+		{
+			"name": "22_run_all",
+			"path": "../22_run_all"
+		}
+	],
+	"settings": {}
+}

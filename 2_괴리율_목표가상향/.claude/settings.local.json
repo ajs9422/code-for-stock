@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(PYTHONIOENCODING=utf-8 KRX_ID=ajs9422 KRX_PW='magma7608!' python -X utf8 0_가치주_찾기.py)"
+    ]
+  }
+}

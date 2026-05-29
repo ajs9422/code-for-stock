@@ -1,0 +1,8 @@
+GEMINI_API_KEY = "AIzaSyDLcflWRrVRrSehPGQ4jadFVcf6BmMMpGI"
+GMAIL_APP_PASSWORD=zywoxgukyiagmusy
+DART_API_KEY=a69209ccb013465a0ffe368d86c713c7fd1267cb
+
+# 이메일 설정 (Gmail SMTP_SSL, 포트 465)
+EMAIL_USER=ajs9422@gmail.com
+EMAIL_PASS=zywoxgukyiagmusy
+EMAIL_TO=jongsu.an@samsung.com

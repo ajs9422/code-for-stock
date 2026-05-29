@@ -1,0 +1,27 @@
+# 주도 섹터 · 주도주 자동 탐색 시스템 — 의존성
+# pip install -r requirements.txt
+
+# ── 핵심 ──────────────────────────────────────────────────────
+pykrx>=1.0.47              # 한국거래소 데이터 (KOSPI/KOSDAQ 주가, 업종)
+pandas>=2.0.0
+numpy>=1.24.0
+pyyaml>=6.0                # config.yaml 파싱
+
+# ── 기술적 지표 ───────────────────────────────────────────────
+pandas-ta>=0.3.14b         # RSI, MACD, 볼린저밴드 등 (ta-lib 대안, 설치 간편)
+                           # ※ Python 3.12+ 설치: pip install pandas-ta --no-deps
+                           #   이후 numba 스텁(.venv/Lib/site-packages/numba/)을 사용
+tqdm>=4.60.0               # pandas-ta 의존성 (--no-deps 설치 시 별도 설치 필요)
+scipy>=1.10.0              # pandas-ta 의존성 (--no-deps 설치 시 별도 설치 필요)
+# ta-lib                   # 고성능 대안 (C 라이브러리 선설치 필요)
+
+# ── 알림 ──────────────────────────────────────────────────────
+python-telegram-bot>=20.0  # 텔레그램 알림 (alert.telegram_enabled: true 시 필요)
+
+# ── 스케줄러 ──────────────────────────────────────────────────
+APScheduler>=3.10.0        # 장중 자동 실행 (scheduler.enabled: true 시 필요)
+
+# ── 시각화 ────────────────────────────────────────────────────
+streamlit>=1.35.0          # 대시보드
+plotly>=5.18.0             # 차트 (candlestick, treemap, scatter)
+# openpyxl>=3.1.0          # Excel 저장 (output.save_excel: true 시 필요)

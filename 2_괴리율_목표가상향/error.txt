@@ -1,0 +1,1 @@
+Error: 'cp949' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence

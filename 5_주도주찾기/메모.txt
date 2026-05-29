@@ -1,0 +1,79 @@
+================================================================
+  주도 섹터 · 주도주 자동 탐색 시스템 — 작업 메모
+  최종 수정: 2026-04-27
+================================================================
+
+■ 환경 설정 완료
+  - 가상환경: .venv (Python 3.14.4)
+  - 설치: pip install -r requirements.txt
+    * pandas-ta는 numba가 Python 3.14 미지원 → --no-deps 로 설치
+      (RSI 계산 자체는 동작, numba 가속만 없음)
+  - .env 파일 생성 (KRX 로그인 정보 포함)
+
+■ 수정한 버그 목록 (main.py)
+
+  1. Windows 콘솔 한글/이모지 깨짐
+     → 상단에 sys.stdout.reconfigure(encoding='utf-8') 추가
+
+  2. KRX API 로그인 필요 (pykrx 1.2.7 신규 요구사항)
+     → .env 자동 로드 코드 추가 (KRX_ID, KRX_PW 환경변수 설정)
+     → .env 파일: KRX_ID=ajs9422 / KRX_PW=magma7608!
+
+  3. KOSPI 섹터 코드 전면 교체 (가장 중요!)
+     → 구 코드(1028~1054)는 pykrx 1.2.7에서 완전히 바뀜
+     → 수정 전 예시: "1028": "음식료품"  ← 실제로는 코스피200 지수 코드
+     → 수정 후 예시: "1005": "음식료·담배" ← 실제 업종 코드
+     → 전체 매핑:
+        1005 음식료·담배 / 1006 섬유·의류   / 1007 종이·목재
+        1008 화학        / 1009 제약         / 1010 비금속
+        1011 금속        / 1012 기계·장비    / 1013 전기전자
+        1014 의료·정밀기기/ 1015 운송장비·부품/ 1016 유통
+        1017 전기·가스   / 1018 건설         / 1019 운송·창고
+        1020 통신        / 1021 금융         / 1024 증권
+        1025 보험        / 1026 일반서비스   / 1027 제조
+
+  4. get_index_ohlcv_by_date 호출 시 name_display=False 추가
+     → 내부 get_index_ticker_name() 인코딩 오류 회피
+
+  5. 시가총액 중복 join 방지
+     → get_market_ohlcv_by_ticker 가 이미 시가총액 포함
+     → get_market_cap_by_ticker 에서는 상장주식수만 추가 join
+
+  6. 거래대금 컬럼 없는 문제 (fetch_volume_ma)
+     → get_market_ohlcv_by_date 응답에 거래대금 없음
+     → 대안: 종가 × 거래량 으로 근사값 계산
+
+■ 실행 확인
+  명령어: python main.py --date 20260424
+  결과: 정상 완료 (158초)
+  - 21개 업종 수집, 651개 종목 필터 통과
+  - 주도 섹터 TOP 5, 섹터별 주도주 출력
+  - CSV 저장: reports/sector_report_20260424.csv
+
+■ 완료된 작업 (2026-04-28)
+
+  7. pandas_ta RSI 동작 검증 → 완료
+     - pandas_ta 0.4.71b0 은 numba 필수 import 구조
+     - Python 3.14에 numba 미지원 → numba 스텁 패키지 생성으로 해결
+       경로: .venv/Lib/site-packages/numba/__init__.py
+     - 누락 의존성 추가 설치: tqdm, scipy (--no-deps 로 인해 누락됨)
+     - RSI 결과 검증 완료 (ta.rsi() 정상 동작, HAS_TA=True)
+
+  8. dashboard.py (Streamlit 대시보드) 실행 테스트 → 완료
+     - 실행: streamlit run dashboard.py
+     - 기동 성공: http://localhost:8501
+     - 의존성 전체 OK (streamlit, plotly, pykrx, pandas_ta, APScheduler)
+
+■ 다음 할 일 (선택)
+  - 사이드바에 RSI 필터 ON/OFF 토글 추가 (현재 filter_leaders에서 주석처리됨)
+  - 주도주 이메일 발송 연동 (4_실적개선 패턴 참고)
+
+■ pykrx 1.2.7 주요 변경 사항 참고
+  - KRX 로그인 필수 (환경변수 KRX_ID, KRX_PW)
+  - get_market_ohlcv_by_ticker 반환 컬럼:
+      시가, 고가, 저가, 종가, 거래량, 거래대금, 등락률, 시가총액
+  - get_market_ohlcv_by_date 반환 컬럼:
+      시가, 고가, 저가, 종가, 거래량, 등락률  (거래대금 없음!)
+  - get_index_ohlcv_by_date 반환 컬럼:
+      시가, 고가, 저가, 종가, 거래량, 거래대금, 상장시가총액
+================================================================

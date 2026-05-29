@@ -1,0 +1,5 @@
+Starting script...
+Found 0 targets
+
+조건에 맞는 종목이 현재 없습니다. 시장 상황을 지켜보세요.
+Script finished

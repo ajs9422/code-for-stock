@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../earnings_screener"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../3_multi_factor_scanner"
+		},
+		{
+			"path": "../실적개선"
+		}
+	],
+	"settings": {}
+}
